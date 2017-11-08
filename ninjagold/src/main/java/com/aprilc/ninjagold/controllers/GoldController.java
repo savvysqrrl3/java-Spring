@@ -1,5 +1,7 @@
 package com.aprilc.ninjagold.controllers;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -24,16 +26,21 @@ public class GoldController {
 		
 		System.out.println(location);
 		switch(location) {
-		case "farm": newGold = (int) (Math.random() * 11 + 10);break;
-		case "cave": newGold = (int) (Math.random() * 11 + 5);break;
-		case "house": newGold = (int) (Math.random() * 11 + 2);break;
-		case "casino": newGold = (int) (Math.random() * 11 + 50);break;
+		case "farm": newGold = (int) ThreadLocalRandom.current().nextInt(10, 20 + 1);break;
+		case "cave": newGold = (int) ThreadLocalRandom.current().nextInt(5, 10 + 1);break;
+		case "house": newGold = (int) ThreadLocalRandom.current().nextInt(2, 5 + 1);break;
+		case "casino": newGold = (int) ThreadLocalRandom.current().nextInt(0, 50 + 1);break;
 		default: newGold = 0;
-		
 		}
-		System.out.println(newGold);
+		int chance = ThreadLocalRandom.current().nextInt(0, 2);
+		System.out.println("chance" + chance);
+		System.out.println("new gold" + newGold);
+		if (chance == 0 && location.equals("casino")) {
+			session.setAttribute("gold", gold - newGold);	
+		}
+		else {
 		session.setAttribute("gold", gold + newGold);
-		
+		}
 		return "redirect:/";
 	    }
 	
