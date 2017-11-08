@@ -9,7 +9,7 @@
 </head>
 <body>
 	
-		<h3> Your gold:  </h3>
+		<h3> Your gold: <c:out value="${gold}" />  </h3>
 		<div style="outline: thin solid black; height: 200px; width: 200px; padding: 20px; display: inline-block">
 		<form action="/process" method="post">
 			
@@ -61,7 +61,7 @@
 				<p>{{entry}}</p>
 			{% endfor %} -->
 			<p>
-				<a href="reset"> Reset All </a>
+				<a href="/reset"> Reset All </a>
 			</p>
 	</body>
 </html>
